@@ -32,6 +32,16 @@ class HumanPlayer(Player):
                 print('Invalid square. Try again.')
         return val
 
+
+class RandomComputerPlayer(Player):
+    def __init__(self, letter):
+        super().__init__(letter)
+
+    def get_move(self, game):
+        square = random.choice(game.available_moves())
+        return square
+    
+
 class SmartComputerPlayer(Player):
     def __init__(self, letter):
         super().__init__(letter)
@@ -75,11 +85,18 @@ class SmartComputerPlayer(Player):
                     best = sim_score
         return best
 
-def get_randomized_players():
+def get_smart_players():
     if random.choice([True, False]):
         return SmartComputerPlayer('X'), HumanPlayer('O')
     else:
         return HumanPlayer('X'), SmartComputerPlayer('O')
+
+
+def get_randomized_players():
+    if random.choice([True, False]):
+        return RandomComputerPlayer('X'), HumanPlayer('O')
+    else:
+        return HumanPlayer('X'), RandomComputerPlayer('O')
 
 class TicTacToe():
     def __init__(self):
