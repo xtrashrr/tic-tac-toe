@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from game import TicTacToe, RandomComputerPlayer, HumanPlayer, get_randomized_players
 
 app1 = Flask(__name__)
@@ -55,6 +55,9 @@ def make_move():
 
     return jsonify(response)
 
+@app1.route('/back')
+def redirect_to_main():
+    return redirect('http://127.0.0.1:5000')  # Redirects to Welcome page (running on port 5000)
 
 @app1.route('/get_move', methods=['POST'])
 def get_computer_move():
